@@ -12,9 +12,10 @@ const MainSearch = () => {
  const navigate=useNavigate()
    
  const cartArray= useSelector((reduxState)=>{
-    return  reduxState.card.content  //torna un [] 
+    return  reduxState.cart.content
+      //torna un [] 
   })
-
+  
 
 
   const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";

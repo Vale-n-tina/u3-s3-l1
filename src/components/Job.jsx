@@ -1,5 +1,6 @@
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Job = ({ data }) => (
   <Row
@@ -13,7 +14,7 @@ const Job = ({ data }) => (
       <a href={data.url} target="_blank" rel="noreferrer">
         {data.title}
       </a>
-      <Button variant="primary">Salva</Button>
+      <Button variant="primary" onClick={()=>{}}>Salva</Button>
     </Col>
   </Row>
 );
