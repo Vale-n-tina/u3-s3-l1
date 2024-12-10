@@ -22,7 +22,7 @@ const MainSearch = () => {
       //torna un [] 
   })
  const pageArray= useSelector((reduxState)=>{
-    return  reduxState.works.inStocks|| []
+    return  reduxState.works.inStock
      
   })
   
