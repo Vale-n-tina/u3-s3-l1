@@ -1,8 +1,13 @@
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { addCart } from "../redux/Actions";
 
-const Job = ({ data }) => (
+const Job = ({ data }) => {
+
+  const dispach=useDispatch() 
+
+     return(
   <Row
     className="mx-0 mt-3 p-3"
     style={{ border: "1px solid #00000033", borderRadius: 4 }}
@@ -14,9 +19,11 @@ const Job = ({ data }) => (
       <a href={data.url} target="_blank" rel="noreferrer">
         {data.title}
       </a>
-      <Button variant="primary" onClick={()=>{}}>Salva</Button>
+      <Button variant="primary" onClick={()=>{
+        dispach(addCart(data))
+      }}>Salva</Button>
     </Col>
-  </Row>
-);
+  </Row>)
+};
 
 export default Job;

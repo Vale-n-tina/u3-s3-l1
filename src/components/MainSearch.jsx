@@ -1,45 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Job from "./Job";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getBooksAction } from "../redux/Actions";
+import { useDispatch } from "react-redux";
+
 
 
 
 const MainSearch = () => {
   const [query, setQuery] = useState("");
   const [jobs, setJobs] = useState([]);
+  console.log(jobs)
  const navigate=useNavigate()
-   
+ const dispatch=useDispatch()
+
+
  const cartArray= useSelector((reduxState)=>{
     return  reduxState.cart.content
       //torna un [] 
   })
+ const pageArray= useSelector((reduxState)=>{
+    return  reduxState.works.inStocks|| []
+     
+  })
   
 
 
-  const baseEndpoint = "https://strive-benchmark.herokuapp.com/api/jobs?search=";
+  
 
   const handleChange = e => {
     setQuery(e.target.value);
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(baseEndpoint + query + "&limit=20");
-      if (response.ok) {
-        const { data } = await response.json();
-        setJobs(data);
-      } else {
-        alert("Error fetching results");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    dispatch(getBooksAction(query)); 
   };
 
+  
+  
   return (
     <Container>
       <Row>
@@ -54,7 +55,7 @@ const MainSearch = () => {
           </Form>
         </Col>
         <Col xs={10} className="mx-auto mb-5">
-          {jobs.map(jobData => (
+          {pageArray.map(jobData => (
             <Job key={jobData._id} data={jobData} />
           ))}
         </Col>

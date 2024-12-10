@@ -1,8 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import mainReducer from "../reducers";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+import cartReducer from "../reducers/cartReducers";
+import bookReducer from "../reducers/workReduces";
 
 
-const myReduxStore=configureStore({
-    reducer:mainReducer
-})
-export default myReduxStore
+const mainReducer = combineReducers({
+    cart: cartReducer,
+    works:bookReducer
+  })
+  
+  const myReduxStore = configureStore({
+    reducer: mainReducer,
+  })
+  
+  export default myReduxStore
